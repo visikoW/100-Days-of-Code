@@ -1,15 +1,18 @@
-from turtle import Turtle, Screen
 
-#criando a tartaruga
-vinycius = Turtle()
-vinycius.shape("turtle")
-vinycius.speed(1)
-vinycius.shapesize(2)
-vinycius.forward(100)
+class Person:
+    def __init__(self, fname, lname):
+        self.firstname = fname
+        self.lastname = lname
 
-windows = Screen()
+    def printname(self):
+        print(self.firstname, self.lastname)
 
+class Student(Person):
+    def __init__(self, fname, lname, year):
+        super().__init__(fname, lname)
+        self.graduationyear = year
 
+Vinycius = Student("Vinycius", "Florencio", 2022)
 
-windows.exitonclick()
-windows.mainloop()
+print(Vinycius.graduationyear)
+print(Vinycius.printname())
