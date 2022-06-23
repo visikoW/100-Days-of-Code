@@ -9,7 +9,22 @@ nr_letters = int(input("How many letters would you like in your password?\n"))
 nr_symbols = int(input(f"How many symbols would you like?\n"))
 nr_numbers = int(input(f"How many numbers would you like?\n"))
 
+final_result = []
 
+if nr_letters or nr_symbols or nr_numbers >= 0:
+    for x in range(0, nr_letters):
+        final_result.append(random.choice(letters))
+    for x in range(0, nr_symbols):
+        final_result.append(random.choice(symbols))
+    for x in range(0, nr_numbers):
+        final_result.append(random.choice(numbers))
+else:
+    print('Invalid number')
+
+random.shuffle(final_result)
+final_result = ''.join(final_result)
+
+print("Final result:" ,final_result)
 
 #Eazy Level - Order not randomised:
 #e.g. 4 letter, 2 symbol, 2 number = JduE&!91
