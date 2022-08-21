@@ -50,8 +50,8 @@ def calculate(num1, num2):
 def answer():
     """Calculate all operations and return the calculation"""
     # First: Ask to user to insert 2 number, the first and second
-    num1 = int(input("Please enter the first number: "))
-    num2 = int(input("Please enter the second number: "))
+    num1 = float(input("Please enter the first number: "))
+    num2 = float(input("Please enter the second number: "))
 
     # Second: Save the result
     result = calculate(num1, num2)
