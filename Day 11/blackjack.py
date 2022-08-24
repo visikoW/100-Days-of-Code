@@ -48,23 +48,24 @@ def end_game(player_decision):
     sum_opponent = sum(opponent_deck)
 
     if sum_player == sum_opponent:
-        return print("Drawn")
+        print("Drawn")
     elif sum_player == 21:
-        return player_win()
+        player_win()
     elif sum_player > 21:
-        return opponent_win()
+        opponent_win()
     elif sum_opponent > 21:
-        return player_win()
+        player_win()
     elif sum_opponent == 21:
-        return opponent_win()
+        opponent_win()
+    elif sum_opponent > sum_player:
+        opponent_win()
+    else:
+        player_win()
 
     if player_decision == "y":
         add_card(player_deck)
-
-    if sum_opponent > sum_player:
-        return opponent_win()
-    elif sum_player > sum_opponent:
-        return player_win()
+        return True
+    return False
 
 def start():
     """Start the blackjack game."""
@@ -79,9 +80,10 @@ def start():
         add_card(opponent_deck)
     table()
 
-    while True:
+    continue_game = True
+    while continue_game:
         another_card = input("Type 'y' to get another card, type 'n' to pass: ").lower()
-        end_game(another_card)
+        continue_game = end_game(another_card)
 
 while True:
     confirm = input("Do you want to play a game of blackjack? (y/n): ")
