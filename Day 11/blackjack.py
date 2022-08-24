@@ -84,9 +84,10 @@ def start():
     table()
 
     winner = verify_pontuation(player_deck, opponent_deck)
+    test_continue = True
 
-    while winner != True or winner != False:
-        verify_pontuation(player_deck, opponent_deck)
+    while test_continue:
+        
 
 while True:
     confirm = input("Do you want to play a game of blackjack? (y/n): ")
