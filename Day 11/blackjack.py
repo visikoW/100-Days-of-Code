@@ -46,25 +46,29 @@ def drawn():
     print(f"  The computer's final hand: {opponent_deck}, final score: {sum(player_deck)}")
     print("This is a Drawn!")
 
-    if sum_player == sum_opponent:
-        print("Drawn")
-    elif sum_player == 21:
-        player_win()
-    elif sum_player > 21:
-        opponent_win()
-    elif sum_opponent > 21:
-        player_win()
-    elif sum_opponent == 21:
-        opponent_win()
-    elif sum_opponent > sum_player:
-        opponent_win()
-    else:
-        player_win()
+def verify_pontuation(player1: list, player2: list) -> bool:
+    """Verify one of those two players win."""
+    player_1 = sum(player1)
+    player_2 = sum(player2)
 
-    if player_decision == "y":
-        add_card(player_deck)
+    if player_1 == player_2:
+        return False
+
+    if player_1 > 21:
+        return False
+    if player_1 == 21:
         return True
-    return False
+
+    if player_2 > 21:
+        return True
+    if player_2 == 21:
+        return False
+    if player_1 > player_2:
+        another_card = input("Want another card? (y/n): ").lower()
+        if another_card != "y":
+            return True
+        else:
+            add_card(player_deck)
 
 def start():
     """Start the blackjack game."""
@@ -83,6 +87,7 @@ def start():
     test_continue = True
 
     while test_continue:
+        print()
 
 while True:
     confirm = input("Do you want to play a game of blackjack? (y/n): ")
