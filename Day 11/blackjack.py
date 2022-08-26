@@ -86,7 +86,7 @@ def start():
     # while sum(opponent_deck) < 21:
     # add_card(opponent_deck)
     table()
-
+    
     while True:
         winner = verify_pontuation(player_deck, opponent_deck)
         if winner == False:
