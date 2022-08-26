@@ -30,41 +30,49 @@ def deck(player: list):
     for x in range(0,2):
         add_card(player)
 
-# Verify if the player just passed the number of cards necessary to play again.
-def opponent_win():
+def text(final):
     print(f"  Your final hand: {player_deck}, final score: {sum(player_deck)}")
     print(f"  Computer's final hand: {opponent_deck}, final score: {sum(opponent_deck)}")
-    print("You went over. You lose =(")
+    print(final)
+
+def opponent_win():
+    text("You went over. You lose =(")
 
 def player_win():
-    print(f"  Your final hand: {player_deck}, final score: {sum(player_deck)}")
-    print(f"  The computer's final hand: {opponent_deck}, final score: {sum(opponent_deck)}")
-    print("Opponent went over. You win =)")
+    text("Opponent went over. You win =)")
 
-# End Game
-def end_game(player_decision):
-    """Tell if the player or the opponent win"""
-    sum_player = sum(player_deck)
-    sum_opponent = sum(opponent_deck)
+def drawn():
+    text("This is a Drawn!")
 
-    if sum_player == sum_opponent:
-        return print("Drawn")
-    elif sum_player == 21:
-        return player_win()
-    elif sum_player > 21:
-        return opponent_win()
-    elif sum_opponent > 21:
-        return player_win()
-    elif sum_opponent == 21:
-        return opponent_win()
+def verify_pontuation(player1: list, player2: list):
+    """Verify one of those two players win."""
+    player_1 = sum(player1)
+    player_2 = sum(player2)
+    p_1 = player_1 > player_2
+    p_2 = player_2 > player_1
 
-    if player_decision == "y":
-        add_card(player_deck)
+    # Verify if the player_1 has a bad hand or the 21
+    if player_1 > 21:
+        return False
+    elif player_1 == 21:
+        return True
 
-    if sum_opponent > sum_player:
-        return opponent_win()
-    elif sum_player > sum_opponent:
-        return player_win()
+    # After the verify all those conditions, now is time to verify if the player_1.
+    elif p_1 or p_2:
+        another_card = input("Another card? (y/n): ").lower()
+
+        if another_card != "y":
+            if p_1:
+                return True
+            elif p_2:
+                return False
+        else:
+            add_card(player_deck)
+            table()
+
+    # Verify if the two players has the same card count
+    elif player_1 == player_2:
+        return "Drawn"
 
 def start():
     """Start the blackjack game."""
@@ -75,13 +83,21 @@ def start():
     # Set your deck and the opponent deck and start the table
     deck(player_deck)
     deck(opponent_deck)
-    while sum(opponent_deck) < 21:
-        add_card(opponent_deck)
+    # while sum(opponent_deck) < 21:
+    # add_card(opponent_deck)
     table()
-
+    
     while True:
-        another_card = input("Type 'y' to get another card, type 'n' to pass: ").lower()
-        end_game(another_card)
+        winner = verify_pontuation(player_deck, opponent_deck)
+        if winner == False:
+            opponent_win()
+            break
+        elif winner == True:
+            player_win()
+            break
+        elif winner == "Drawn":
+            drawn()
+            break
 
 while True:
     confirm = input("Do you want to play a game of blackjack? (y/n): ")
