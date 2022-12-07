@@ -18,7 +18,7 @@ class CarManager():
             new_car.speed(1)
             new_car.penup()
             new_car.color(choice(COLORS))
-            random_y = randint(-250, 250)
+            random_y = randint(-250, 240)
             new_car.goto(300, random_y)
             self.all_cars.append(new_car)
         
@@ -31,12 +31,12 @@ class CarManager():
             car.hideturtle()
         self.all_cars = []
         
-    def verify_collision(self, player: Turtle) -> bool:
+    def is_collision_with_player(self, player: Turtle) -> bool:
         for car in self.all_cars:
-            if car.distance(player) <= 20:
-                print(player.xcor())
-                print(car.xcor())
+            if car.distance(player) <= 30 and car.xcor() <= player.xcor() + 30:
                 print(car.distance(player))
+                print(car.xcor())
+                print(player.xcor() + 20)
                 return True
         return False
         

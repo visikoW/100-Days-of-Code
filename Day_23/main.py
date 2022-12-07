@@ -36,7 +36,7 @@ class Game:
             self.car_manager.move_cars()
             
             # Check player collision with car_manager
-            if self.car_manager.verify_collision(self.player):
+            if self.car_manager.is_collision_with_player(self.player):
                 is_game_on = False
             
             # Check if the player is already reached the end_of_game
